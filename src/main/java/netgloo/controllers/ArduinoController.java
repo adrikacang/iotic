@@ -3,6 +3,8 @@ package netgloo.controllers;
 import netgloo.models.Arduino;
 import netgloo.models.ArduinoDao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,8 @@ public class ArduinoController {
     //String userid = payload.get("userid");
     Arduino result;
     try{
-      result = arduinoDao.getCurrent();
+      List<Arduino> results = arduinoDao.getAll();
+      result = results.get(results.size()-1);
     } catch (Exception ex) {
       System.out.println("error " +  ex.toString());
       result = new Arduino();
